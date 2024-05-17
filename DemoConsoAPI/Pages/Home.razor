@@ -1,0 +1,16 @@
+﻿@page "/"
+@using System.Security.Claims
+<AuthorizeView>
+    <NotAuthorized>
+        Pas bien !!!
+    </NotAuthorized>
+    <Authorized>
+        <PageTitle>Home</PageTitle>
+
+        <h1>Hello, @context.User.FindFirst(x => x.Type == ClaimTypes.Email).Value</h1>
+
+        Welcome to your new app.
+    </Authorized>
+
+</AuthorizeView>
+
