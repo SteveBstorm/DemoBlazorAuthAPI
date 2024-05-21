@@ -1,0 +1,66 @@
+﻿@page "/createmovie"
+@using DemoConsoAPI.Models
+@if (Persons != null)
+{
+    <div class="card ">
+        <div class="card-header bg-dark text-white mb-3">
+            Ajouter un film
+        </div>
+        <div card="card-body justify-content-center">
+            <EditForm class="row g-3 align-items-center w-75"
+                      Model="MyForm"
+                      OnValidSubmit="OnSubmitForm">
+                <DataAnnotationsValidator />
+                <div class="list-item">
+                    <label class="col-form-label">Titre</label>
+                    <InputText @bind-Value="MyForm.Title" class="form-control form-control-sm" />
+                    <ValidationMessage For="@(() => MyForm.Title)" />
+                </div>
+                <div class="list-item">
+                    <label class="col-form-label">Desciption</label>
+                    <InputTextArea @bind-Value="MyForm.Description" class="form-control form-control-sm" />
+                    <ValidationMessage For="@(() => MyForm.Description)" />
+                </div>
+
+                <div class="list-item">
+                    <label class="col-form-label">Realisateur</label>
+                    <InputSelect @bind-Value="MyForm.RealisatorId" class="form-control">
+
+                        @foreach (Personne p in Persons)
+                        {
+                            <option value="@p.Id">@p.Firstname @p.Lastname</option>
+                        }
+                    </InputSelect>
+                </div>
+                
+                <div class="card">
+                    <div class="card-header">Créer le casting <button type="button" @onclick="AddPersonToCasting" class="btn btn-sm">+</button></div>
+                @if(MyForm.Casting.Count() > 0){
+                    <div class="card-body">
+                            @foreach(Actor a in MyForm.Casting)
+                            {
+                                <div class="form-group row">
+                                    <span class="w-50">
+                                        <InputSelect @bind-Value="a.Id" class="form-control">
+
+                                            @foreach (Personne p in Persons)
+                                            {
+                                                <option value="@p.Id">@p.Firstname @p.Lastname</option>
+                                            }
+                                        </InputSelect>
+                                    </span>
+                                    <span class="w-auto"><label class="col-form-label">Dans le rôle de : </label></span>
+                                    <span class="w-auto">
+                                        <InputText @bind-Value="a.Role" class="form-control" />
+                                    </span>
+                                </div>
+                            }
+                        </div>
+
+                }
+                </div>
+                <button class="btn btn-outline-success" type="submit">Valider</button>
+            </EditForm>
+        </div>
+    </div>
+}

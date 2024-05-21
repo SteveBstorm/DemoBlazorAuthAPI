@@ -1,0 +1,29 @@
+﻿@page "/register"
+<h3>RegisterUser</h3>
+
+<EditForm class="row g-3 align-items-center w-75"
+    Model="MyForm" 
+    OnValidSubmit="OnSubmitForm">
+    <DataAnnotationsValidator />
+    <div class="list-item">
+        <label class="col-form-label">Email</label>
+        <InputText type="email" @bind-Value="MyForm.Email" class="form-control form-control-sm" />
+        <ValidationMessage For="@(() => MyForm.Email)" />
+    </div>
+    <div class="list-item">
+        <label class="col-form-label">Nickname</label>
+        <InputText @bind-Value="MyForm.Nickname" class="form-control form-control-sm" />
+        <ValidationMessage For="@(() => MyForm.Nickname)" />
+    </div>
+    <div class="list-item">
+        <label class="col-form-label">Mot de passe</label>
+        <InputText type="password" @bind-Value="MyForm.Password" class="form-control form-control-sm" />
+        <ValidationMessage For="@(() => MyForm.Password)" />
+    </div>
+    <div class="list-item">
+        <label class="col-form-label">Confirmer mot de passe </label>
+        <InputText type="password" @bind-Value="MyForm.ConfirmPassword" class="form-control form-control-sm" />
+        <ValidationMessage For="@(() => MyForm.ConfirmPassword)" />
+    </div>
+    <button class="btn btn-outline-success" type="submit">Valider</button>
+</EditForm>

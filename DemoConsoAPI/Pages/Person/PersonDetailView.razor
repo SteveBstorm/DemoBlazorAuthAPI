@@ -1,0 +1,46 @@
+﻿@page "/persondetail/{Id:int}"
+@inject NavigationManager Nav
+@using DemoConsoAPI.Models
+<AuthorizeView>
+    <Authorized>
+        
+        @if (CurrentPerson != null && Filmo != null)
+        {
+            <fieldset class="justify-content-center">
+                <legend>Filmographie</legend>
+                <div style="display : flex; flex-direction : row;">
+                    <div class="card w-25">
+                        <div class="card-header text-white bg-dark mb-3">Réalisateur : @CurrentPerson.Firstname @CurrentPerson.Lastname</div>
+                        <div class="card-body justify-content-center">
+                            <img src="@(CurrentPerson.PictureURL)" class="rounded" width="250px" />
+                        </div>
+                    </div>
+
+                    <div class="card w-75">
+                        <div class="card-header text-white bg-dark mb-3">Casting</div>
+                        <div class="card-body">
+                            <table class="table table-hover w-100">
+                                <thead>
+                                    <tr>
+                                        <th>Titre</th>
+                                        <th>Synopsis</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (SimpleMovieModel a in Filmo)
+                                    {
+                                        <tr @onclick=@(() => Nav.NavigateTo("moviedetail/" + @a.Id))>
+                                            <td>@a.Title</td>
+                                            <td>@a.Description</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        }
+    </Authorized>
+
+</AuthorizeView>

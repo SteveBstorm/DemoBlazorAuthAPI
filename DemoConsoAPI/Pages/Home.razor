@@ -8,7 +8,7 @@
         <PageTitle>Home</PageTitle>
 
         <h1>Hello, @context.User.FindFirst(x => x.Type == ClaimTypes.Email).Value</h1>
-
+        @context.User.FindFirst(x => x.Type == ClaimTypes.Role).Value
         Welcome to your new app.
     </Authorized>
 

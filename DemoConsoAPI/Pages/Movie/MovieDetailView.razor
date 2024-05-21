@@ -1,0 +1,42 @@
+﻿@page "/moviedetail/{Id:int}"
+@using DemoConsoAPI.Models
+@if (Movie != null)
+{
+    <fieldset class="justify-content-center">
+        <legend>@Movie.Title</legend>
+        <h5>@Movie.Description</h5>
+        <div style="display : flex; flex-direction : row;">
+            <div class="card w-25">
+                <div class="card-header text-white bg-dark mb-3">Réalisateur : @Movie.Realisator.Firstname @Movie.Realisator.Lastname</div>
+                <div class="card-body justify-content-center">
+                    <img src="@(Movie.Realisator.PictureURL)" class="rounded" width="250px" />
+                </div>
+            </div>
+
+            <div class="card w-75">
+                <div class="card-header text-white bg-dark mb-3">Casting</div>
+                <div class="card-body">
+                    <table class="table table-hover w-100">
+                        <thead>
+                           <tr>
+                                <th>Acteur</th>
+                                <th>Rôle</th>
+                                <th>Photo</th>
+                           </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(Actor a in Movie.Casting)
+                            {
+                                <tr @onclick=@(() => Nav.NavigateTo("persondetail/" + @a.Id))>
+                                    <td>@a.Firstname @a.Lastname</td>
+                                    <td>@a.Role</td>
+                                    <td><img src="@(a.PictureURL)" height="75px" /></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+}

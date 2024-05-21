@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using Newtonsoft.Json;
+using System.Net.Http.Json;
 using System.Text;
 
 namespace DemoConsoAPI.Pages

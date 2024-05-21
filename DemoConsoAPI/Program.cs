@@ -1,4 +1,5 @@
 using DemoConsoAPI;
+using DemoConsoAPI.Infrastructure;
 using DemoConsoAPI.Security;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
@@ -8,7 +9,15 @@ var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
 builder.RootComponents.Add<HeadOutlet>("head::after");
 
-builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7158/api/") });
+
+builder.Services.AddTransient<TokenInterceptor>();
+
+builder.Services.AddHttpClient("WithToken", sp =>
+{
+    new HttpClient();
+    sp.BaseAddress = new Uri("https://localhost:7158/api/");
+}).AddHttpMessageHandler<TokenInterceptor>();
 
 builder.Services.AddAuthorizationCore();
 builder.Services.AddSingleton<AuthenticationStateProvider, MyStateProvider>();

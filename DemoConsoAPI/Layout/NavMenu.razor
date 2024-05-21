@@ -14,6 +14,21 @@
                 <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
             </NavLink>
         </div>
+        <div class="nav-item px-3">
+            <NavLink class="nav-link" href="movielist">
+                <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Films
+            </NavLink>
+        </div>
+        <AuthorizeView Roles="admin">
+            <Authorized>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="createmovie">
+                        <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Ajouter un film
+                    </NavLink>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+        <hr />
         <AuthorizeView>
             <Authorized>
                 <div class="nav-item px-3">
@@ -31,6 +46,11 @@
                 <div class="nav-item px-3">
                     <NavLink class="nav-link" href="login">
                         <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> Connexion
+                    </NavLink>
+                </div>
+                <div class="nav-item px-3">
+                    <NavLink class="nav-link" href="register">
+                        <span class="bi bi-list-nested-nav-menu" aria-hidden="true"></span> S'enregistrer
                     </NavLink>
                 </div>
             </NotAuthorized>

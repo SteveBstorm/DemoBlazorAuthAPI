@@ -1,0 +1,21 @@
+﻿@page "/movielist"
+@using DemoConsoAPI.Models
+<h3>Liste des films</h3>
+@if (Movies != null)
+{
+    <table class="table table-bordered table-info w-50">
+        <tr>
+            <th>Titre</th>
+            <th class="w-25">Actions</th>
+        </tr>
+        @foreach (SimpleMovieModel m in Movies)
+        {
+            <tr>
+                <td>@m.Title</td>
+                <td><button @onclick="@(() => Nav.NavigateTo("moviedetail/"+ m.Id))" class="btn btn-outline-dark btn-sm">Détails</button>
+                    <button @onclick="@(() => Degage(m.Id))" class="btn btn-outline-dark btn-sm">Supprimer</button>
+                </td>
+            </tr>
+        }
+    </table>
+}
